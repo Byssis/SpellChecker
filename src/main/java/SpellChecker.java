@@ -21,12 +21,21 @@ public class SpellChecker {
     private int depth;
 
     public List<String> correctWord(String word) {
+        Set<String> checked = new HashSet<String>();
         depth = 0;
+        if(bloom.test(word)){
+            List<String> l = new ArrayList<String>();
+            l.add(word);
+            return l;
+        }
+        checked.add(word);
         Set<String> candidates = new HashSet<String>();
         List<String> list = edits(word);
         for (String edit : list) {
             if (bloom.test(edit) && !candidates.contains(edit))
                 candidates.add(edit);
+            else
+                checked.add(word);
         }
         depth++;
         if (candidates.size() > 0)
@@ -37,8 +46,10 @@ public class SpellChecker {
                 for (String w : edits(edit)) {
                     if (bloom.test(w) && !candidates.contains(w))
                         candidates.add(w);
-                    else
+                    else if(!checked.contains(word)) {
                         string.add(w);
+                    }
+                    checked.add(word);
                 }
             }
             depth++;

@@ -58,11 +58,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Driver.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Driver.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Driver.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="26" column="16" selection-start-line="26" selection-start-column="16" selection-end-line="26" selection-end-column="16" />
+            <state relative-caret-position="527">
+              <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#375#383#0" expanded="true" />
@@ -72,15 +72,17 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SpellChecker.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="SpellChecker.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/SpellChecker.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1139">
-              <caret line="67" column="9" selection-start-line="67" selection-start-column="9" selection-end-line="67" selection-end-column="9" />
+            <state relative-caret-position="306">
+              <caret line="50" column="21" selection-start-line="50" selection-start-column="21" selection-end-line="50" selection-end-column="21" />
               <folding>
-                <element signature="e#676#684#0" expanded="true" />
-                <element signature="e#1067#1075#0" expanded="true" />
-                <element signature="e#1603#1611#0" expanded="true" />
+                <element signature="e#654#662#0" expanded="true" />
+                <element signature="e#757#765#0" expanded="true" />
+                <element signature="e#897#905#0" expanded="true" />
+                <element signature="e#1340#1348#0" expanded="true" />
+                <element signature="e#1967#1975#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -103,10 +105,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/SpellChecker.java" />
         <option value="$PROJECT_DIR$/src/main/java/HashCalculator.java" />
         <option value="$PROJECT_DIR$/src/main/java/Bloom.java" />
         <option value="$PROJECT_DIR$/src/main/java/Driver.java" />
+        <option value="$PROJECT_DIR$/src/main/java/SpellChecker.java" />
       </list>
     </option>
   </component>
@@ -633,18 +635,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/SpellChecker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1139">
-          <caret line="67" column="9" selection-start-line="67" selection-start-column="9" selection-end-line="67" selection-end-column="9" />
-          <folding>
-            <element signature="e#676#684#0" expanded="true" />
-            <element signature="e#1067#1075#0" expanded="true" />
-            <element signature="e#1603#1611#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/HashCalculator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="663">
@@ -669,12 +659,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Driver.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="26" column="16" selection-start-line="26" selection-start-column="16" selection-end-line="26" selection-end-column="16" />
+        <state relative-caret-position="527">
+          <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#375#383#0" expanded="true" />
             <element signature="e#683#691#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/SpellChecker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="50" column="21" selection-start-line="50" selection-start-column="21" selection-end-line="50" selection-end-column="21" />
+          <folding>
+            <element signature="e#654#662#0" expanded="true" />
+            <element signature="e#757#765#0" expanded="true" />
+            <element signature="e#897#905#0" expanded="true" />
+            <element signature="e#1340#1348#0" expanded="true" />
+            <element signature="e#1967#1975#0" expanded="true" />
           </folding>
         </state>
       </provider>
