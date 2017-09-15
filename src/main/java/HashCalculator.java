@@ -1,9 +1,22 @@
-import java.nio.charset.Charset;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 
 /**
  * Created by Albin on 2017-09-15.
  */
 public class HashCalculator {
+    static final String hashName = "MD5";
+    static final MessageDigest digestFunction;
+    static { // The digest method is reused between instances
+        MessageDigest tmp;
+        try {
+            tmp = java.security.MessageDigest.getInstance(hashName);
+        } catch (NoSuchAlgorithmException e) {
+            tmp = null;
+        }
+        digestFunction = tmp;
+    }
 
     public static long hash(String data, int i){
         return hash(data.getBytes(), i);
@@ -56,6 +69,33 @@ public class HashCalculator {
         hash ^= hash >> 17;
         hash += hash << 5;
         return Math.abs(hash);
+    }
+
+    public static int[] createHashes(byte[] data, int hashes) {
+        int[] result = new int[hashes];
+
+        int k = 0;
+        byte salt = 0;
+        while (k < hashes) {
+            byte[] digest;
+
+            synchronized (digestFunction) {
+                digestFunction.update(salt);
+                salt++;
+                digest = digestFunction.digest(data);
+            }
+
+            for (int i = 0; i < digest.length/4 && k < hashes; i++) {
+                int h = 0;
+                for (int j = (i*4); j < (i*4)+4; j++) {
+                    h <<= 8;
+                    h |= ((int) digest[j]) & 0xFF;
+                }
+                result[k] = h;
+                k++;
+            }
+        }
+        return result;
     }
 
     private static final int [] HASH_TABLE = {157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229, 233, 239, 241, 251, 257, 263, 269, 271, 277, 281, 283, 293, 307, 311, 313, 317, 331, 337, 347, 349, 353, 359, 367, 373, 379, 383, 389, 397, 401, 409, 419, 421, 431, 433, 439, 443, 449, 457, 461, 463, 467, 479, 487, 491, 499, 503, 509, 521, 523, 541, 547, 557, 563, 569, 571, 577, 587, 593, 599, 601, 607, 613, 617, 619, 631, 641, 643, 647, 653, 659, 661, 673, 677, 683, 691, 701, 709, 719, 727, 733, 739, 743, 751, 757, 761, 769, 773, 787, 797, 809, 811, 821, 823, 827, 829, 839, 853, 857, 859, 863, 877, 881, 883, 887, 907, 911, 919, 929, 937, 941, 947, 953, 967, 971, 977, 983, 991, 997};

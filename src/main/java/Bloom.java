@@ -16,26 +16,22 @@ public class Bloom {
 
     public boolean add(String word){
         boolean inSet = true;
-        for (int i = 0; i < this.k; i++){
-            long hash = HashCalculator.hash(word, i);
-            int pos = (int) (hash % m);
+        int[] hashes = HashCalculator.createHashes(word.getBytes(), this.k);
+        for(int hash : hashes) {
+            int pos = (Math.abs(hash % m));
             if(!bitArray[pos]){
-                inSet = false;
                 bitArray[pos] = true;
+                inSet = false;
             }
         }
-        if(!inSet) count++;
+        if(inSet == false) count++;
         return inSet;
     }
 
     public boolean test(String word){
-        for (int i = 0; i < this.k; i++){
-            long hash = HashCalculator.hash(word, i);
-            int pos = (int) (hash % m);
-            if(!bitArray[pos]){
-                return false;
-            }
-        }
+        int[] hashes = HashCalculator.createHashes(word.getBytes(), this.k);
+        for(int hash : hashes)
+            if(!bitArray[(Math.abs(hash % m))]) return false;
         return true;
     }
 
