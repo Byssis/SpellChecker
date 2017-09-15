@@ -2,18 +2,13 @@
  * Created by Albin on 2017-09-14.
  */
 public class Bloom {
-    private double p;
-    private int m;
-    private int n;
-    private int k;
-    private int count;
 
+    private int count;
+    private int k;
+    private int m;
     private boolean [] bitArray;
 
     public Bloom(int n, double p){
-        this.p = p;
-        this.n = n;
-
         this.m =  (int)Math.ceil(-1*n*Math.log(p)/Math.pow(Math.log(2), 2));
         this.k = (int)Math.ceil(-Math.log(p)/Math.log(2));
         this.bitArray = new boolean[m];
@@ -47,9 +42,6 @@ public class Bloom {
     public int count(){
         return count;
     }
-
-
-
 }
 
 
