@@ -14,14 +14,14 @@ public class CorrectString {
 
     int partDist(String w1, String w2, int w1len, int w2len) {
         int [][] dp = new int [w1len + 1][w2len +1];
-        for(int i = 0; i < w1len; i++){
-            for(int j = 0; j < w2len; j++){
+        for(int i = 0; i <= w1len; i++){
+            for(int j = 0; j <= w2len; j++){
                 // If word 1 is empty
                 if(i == 0)
                     dp[i][j] = j;
                 // If word 2 is empty
                 else if(j == 0)
-                    dp[i][j] = j;
+                    dp[i][j] = i;
 
                 else if(w1.charAt(i-1) == w2.charAt(j-1))
                     dp[i][j] = dp[i-1][j-1];
@@ -46,7 +46,7 @@ public class CorrectString {
     public CorrectString(String w, List<String> wordList) {
         for (String s : wordList) {
             int dist = Distance(w, s);
-            // System.out.println("d(" + w + "," + s + ")=" + dist);
+            //System.out.println("d(" + w + "," + s + ")=" + dist);
             if (dist < closestDistance || closestDistance == -1) {
                 closestDistance = dist;
                 closestWords = new LinkedList<String>();
