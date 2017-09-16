@@ -23,7 +23,7 @@ public class SpellChecker {
     public List<String> correctWord(String word) {
         Set<String> checked = new HashSet<String>();
         depth = 0;
-        if(bloom.test(word)){
+        if (bloom.test(word)) {
             List<String> l = new ArrayList<String>();
             l.add(word);
             return l;
@@ -46,13 +46,16 @@ public class SpellChecker {
                 for (String w : edits(edit)) {
                     if (bloom.test(w) && !candidates.contains(w))
                         candidates.add(w);
-                    else if(!checked.contains(word)) {
+                    else if (!checked.contains(w)) {
                         string.add(w);
                     }
-                    checked.add(word);
+                    checked.add(w);
                 }
+
             }
             depth++;
+            if(depth == 3)
+                System.out.println();
             list = new ArrayList<String>(string);
         }
 
@@ -105,4 +108,18 @@ public class SpellChecker {
         return sb.toString();
     }
 
+    public static void main(String[] args){
+        List<String> wordList = new ArrayList<String>();
+        List<String> queries = new ArrayList<String>();
+        int i = 0;
+        while (!args[i].equals("#"))
+            wordList.add(args[i++]);
+
+        SpellChecker spellChecker = new SpellChecker(wordList);
+
+
+        while (++i < args.length){
+            System.out.println(args[i] + " " + spellChecker.printCorrect(args[i]));
+        }
+    }
 }
