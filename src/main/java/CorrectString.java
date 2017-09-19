@@ -8,29 +8,47 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class CorrectString {
-    LinkedList<String> closestWords = null;
+    private LinkedList<String> closestWords = null;
 
-    int closestDistance = -1;
+    private int closestDistance = -1;
 
+    /*
+        Get closet distance between two words. The distance between two word is the number of edits
+        word 1 needs to be equal to word 2. Allowed edits are remove one letter from any position, add
+        one letter in any position and change any letter in the word. All of the edits have the coast of 1.
+        This method using dynamic programing using bottom up strategy.
+        @param  w1      Word to calculate distance from word 2
+        @param  w2      Word to compare to
+        @param  w1len   Length of word 1
+        @param  w2len   Length of word 2
+        @return         Minimum distance between
+     */
     int partDist(String w1, String w2, int w1len, int w2len) {
-        int [][] dp = new int [w1len + 1][w2len +1];
+        // To remember previous state
+        int [][] matrix = new int [w1len + 1][w2len +1];
         for(int i = 0; i <= w1len; i++){
             for(int j = 0; j <= w2len; j++){
                 // If word 1 is empty
                 if(i == 0)
-                    dp[i][j] = j;
+                    matrix[i][j] = j;
                 // If word 2 is empty
                 else if(j == 0)
-                    dp[i][j] = i;
+                    matrix[i][j] = i;
 
+                // if the previous letter are the same
                 else if(w1.charAt(i-1) == w2.charAt(j-1))
-                    dp[i][j] = dp[i-1][j-1];
+                    matrix[i][j] = matrix[i-1][j-1];
+                /*
+                    remove one letter matrix[i][j-1]
+                    add one letter matrix[i-1][j]
+                    change letter matrix[i-1][j-1]
+                 */
                 else
-                    dp[i][j] = 1 + min(dp[i][j-1], dp[i-1][j], dp[i-1][j-1]);
+                    matrix[i][j] = 1 + min(matrix[i][j-1], matrix[i-1][j], matrix[i-1][j-1]);
             }
         }
 
-        return dp[w1len][w2len];
+        return matrix[w1len][w2len];
     }
 
     private int min(int insert, int remove, int replace) {
