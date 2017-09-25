@@ -4,11 +4,15 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class CorrectString {
     private LinkedList<String> closestWords = null;
+
+    private Map<String, Integer> cache;
 
     private int closestDistance = -1;
 
@@ -17,7 +21,7 @@ public class CorrectString {
         word 1 needs to be equal to word 2. Allowed edits are remove one letter from any position, add
         one letter in any position and change any letter in the word. All of the edits have the coast of 1.
         This method using dynamic programing using bottom up strategy.
-        @param  w1      Word to calculate distance from word 2
+        @param  w1      Word to calculate distance to word 2
         @param  w2      Word to compare to
         @param  w1len   Length of word 1
         @param  w2len   Length of word 2
@@ -61,9 +65,11 @@ public class CorrectString {
         return partDist(w1, w2, w1.length(), w2.length());
     }
 
-    public CorrectString(String w, List<String> wordList) {
+    public CorrectString(String w, List<String> wordList, Map<String, Integer> cache) {
         for (String s : wordList) {
-            int dist = Distance(w, s);
+            if (closestDistance != -1 && w.length() + closestDistance < s.length()) continue;
+            String key = w+";"+s;
+            int dist = (cache.containsKey(key)) ? cache.get(key) : Distance(w, s);
             //System.out.println("d(" + w + "," + s + ")=" + dist);
             if (dist < closestDistance || closestDistance == -1) {
                 closestDistance = dist;
@@ -72,6 +78,7 @@ public class CorrectString {
             }
             else if (dist == closestDistance)
                 closestWords.add(s);
+            cache.put(key, dist);
         }
     }
 
@@ -100,15 +107,16 @@ public class CorrectString {
         // Säkrast att specificera att UTF-8 ska användas, för vissa system har annan
         // standardinställning för teckenkodningen.
         List<String> wordList = readWordList(stdin);
+        HashMap<String, Integer> map = new HashMap<String, Integer>();
         String word;
         while ((word = stdin.readLine()) != null) {
-            CorrectString closestWords = new CorrectString(word, wordList);
+            CorrectString closestWords = new CorrectString(word, wordList, map);
             System.out.print(word + " (" + closestWords.getMinDistance() + ")");
             for (String w : closestWords.getClosestWords())
                 System.out.print(" " + w);
             System.out.println();
         }
         long tottime = (System.currentTimeMillis() - t1);
-        System.out.println("CPU time: " + tottime + " ms");
+        //System.out.println("CPU time: " + tottime + " ms");
     }
 }
